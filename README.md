@@ -43,4 +43,4 @@ Run the script:
 python main.py
 ```
 
-The script will open a Chrome browser, log in to LinkedIn, and scrape the specified profile for the name and headline.
+The script will open a Chrome browser, log in to LinkedIn, and scrape the specified profile for the name.
