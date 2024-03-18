@@ -1,30 +1,59 @@
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
-
 from bs4 import BeautifulSoup
+import time
 
-driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+# Replace with your LinkedIn account credentials
+USERNAME=input("Enter your linkedin email address: ")
+PASSWORD=input("Enter your linkedin password: ")
 
-# Navigate to the LinkedIn login page
-driver.get('https://www.linkedin.com/login')
+# URL of the LinkedIn login page
+LOGIN_URL = 'https://www.linkedin.com/login'
 
-# Enter your email address and password
-driver.find_element(By.ID, 'username').send_keys('#insert linkedin email address for login')
-driver.find_element(By.ID,'password').send_keys('#insert linkedin password for login!')
-# Submit the login form
-driver.find_element(By.CSS_SELECTOR,'.login__form_action_container button').click()
+# Function to log in to LinkedIn
+def login(driver):
 
-# Enter desired linkedin profile url for scraping
-profile_url = 'https://www.linkedin.com/in/profilelink/'
-driver.get(profile_url)
 
-# Get the page source
-page_source = driver.page_source
-# Parse the HTML using Beautiful Soup
-soup = BeautifulSoup(page_source, 'html.parser')
-# Extract the name and headline
-name = soup.find('h1', {'class': 'text-heading-xlarge inline t-24 v-align-middle break-words'}).text.strip()
-# Print the extracted data
-print('Name:', name)
+    driver.get(LOGIN_URL)
+    time.sleep(1)
+
+    driver.find_element(By.ID, 'username').send_keys(USERNAME)
+    driver.find_element(By.ID,'password').send_keys(PASSWORD)
+
+    driver.find_element(By.CSS_SELECTOR,'.login__form_action_container button').click()
+
+    time.sleep(1)
+
+    # Enter desired linkedin profile url for scraping
+    profile_url = 'https://www.linkedin.com/in/prasiddhashah/'
+    driver.get(profile_url)
+
+    # Get the page source
+    page_source = driver.page_source
+
+    # Parse the HTML using Beautiful Soup
+    soup = BeautifulSoup(page_source, 'html.parser')
+
+    # Extract the name and headline
+    name = soup.find('h1', {'class': 'text-heading-xlarge inline t-24 v-align-middle break-words'}).text.strip()
+    time.sleep(2)
+
+    # Print the extracted data
+    print('Name:', name)
+
+# Main script
+if __name__ == '__main__':
+    options = webdriver.ChromeOptions()
+    options.add_argument('--start-maximized')  # Maximize the browser window
+    driver = webdriver.Chrome(options=options)
+
+    try:
+        login(driver)
+    except Exception as e:
+        print(f"Error: {e}")
+    finally:
+        # Close the browser window
+        driver.quit()
