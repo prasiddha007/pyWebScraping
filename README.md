@@ -33,11 +33,9 @@ This Python script uses Selenium and Beautiful Soup to scrape a LinkedIn profile
 
 ## Usage
 
-1. Replace `#insert linkedin email address for login` with your LinkedIn email address.
-2. Replace `#insert linkedin password for login!` with your LinkedIn password.
-3. Replace `https://www.linkedin.com/in/profilelink/` with the URL of the LinkedIn profile you want to scrape.
-
-Run the script:
+1. Enter your LinkedIn email address and password when prompted.
+2. Replace `https://www.linkedin.com/in/profilelink/` with the URL of the LinkedIn profile you want to scrape.
+3. Run the script:
 
 ```bash
 python main.py
