@@ -9,6 +9,7 @@ import time
 # Replace with your LinkedIn account credentials
 USERNAME=input("Enter your linkedin email address: ")
 PASSWORD=input("Enter your linkedin password: ")
+profile_url=input("Enter the desired linkedin profile url for scraping: ")
 
 # URL of the LinkedIn login page
 LOGIN_URL = 'https://www.linkedin.com/login'
@@ -27,8 +28,7 @@ def login(driver):
 
     time.sleep(1)
 
-    # Enter desired linkedin profile url for scraping
-    profile_url = 'https://www.linkedin.com/in/prasiddhashah/'
+    # desired linkedin profile url for scraping
     driver.get(profile_url)
 
     # Get the page source
